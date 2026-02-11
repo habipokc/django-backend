@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}
+Ürün Detayı
+{% endblock %}
+
+{% block content %}
+<div class="container pt-5 mt-4">
+    <div class="row">
+        <div class="col-md-6 p-5">
+            {% if urun.resim %}
+                <img src="{{ urun.resim.url }}" class="img-fluid" alt="{{ urun.isim }}">
+            {% else %}
+                <img src="/static/img/no-image.png" class="img-fluid" alt="Resim yok">
+            {% endif %}
+        </div>
+        <div class="col-md-6 p-3">
+            <h1>{{ urun.isim }}</h1>
+
+            {% if urun.indirimli_fiyat %}
+                <p class="fs-4">
+                    <del class="text-secondary fs-6">{{ urun.fiyat }} TL</del>
+                    <span class="text-danger fw-bold">
+                        {{ urun.indirimli_fiyat }} TL
+                    </span>
+                </p>
+            {% else %}
+                <p class="fs-4 fw-bold">
+                    {{ urun.fiyat }} TL
+                </p>
+            {% endif %}
+
+            <a href="#" class="btn btn-success btn-lg mt-3">Hemen Al</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

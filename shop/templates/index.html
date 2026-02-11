@@ -5,19 +5,40 @@ Anasayfa
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container pt-5">
     <div class="row">
-      {% for urun in urunler %}
-        <div class="col-md-3">
-            <div class="card">
-              <img src="{{urun.resim.url}}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{urun.isim}}</h5>
-                <p class="card-text fs-4">{{urun.fiyat}}</p>
-                <a href="#" class="btn btn-primary">Hemen Al</a>
-              </div>
-            </div>
+        {% for urun in urunler %}
+        <div class="col-md-3 col-6 mt-3">
+            <div class="card h-100 shadow-sm">
 
+                {% if urun.resim %}
+                    <img src="{{ urun.resim.url }}" class="card-img-top" alt="{{ urun.isim }}">
+                {% else %}
+                    <img src="/static/img/no-image.png" class="card-img-top" alt="Resim yok">
+                {% endif %}
+
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ urun.isim }}</h5>
+
+                    {% if urun.indirimli_fiyat %}
+                        <p class="card-text fs-5">
+                            <del class="text-secondary fs-6">{{ urun.fiyat }} TL</del>
+                            <span class="text-danger fw-bold">
+                                {{ urun.indirimli_fiyat }} TL
+                            </span>
+                        </p>
+                    {% else %}
+                        <p class="card-text fs-5 fw-bold">
+                            {{ urun.fiyat }} TL
+                        </p>
+                    {% endif %}
+
+                    <a href="{% url 'urundetay' urun.slug %}" class="btn btn-success w-100">
+                        Hemen Al
+                    </a>
+                </div>
+
+            </div>
         </div>
         {% endfor %}
     </div>

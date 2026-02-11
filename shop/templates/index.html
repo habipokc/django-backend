@@ -5,6 +5,21 @@ Anasayfa
 {% endblock %}
 
 {% block content %}
-    <h1>Shop</h1>
-    <p>Welcome to the shop</p>
+<div class="container">
+    <div class="row">
+      {% for urun in urunler %}
+        <div class="col-md-3">
+            <div class="card">
+              <img src="{{urun.resim.url}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{urun.isim}}</h5>
+                <p class="card-text fs-4">{{urun.fiyat}}</p>
+                <a href="#" class="btn btn-primary">Hemen Al</a>
+              </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

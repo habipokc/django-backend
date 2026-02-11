@@ -70,3 +70,19 @@ class Urunler(models.Model):
 
     def __str__(self):
         return self.isim
+
+
+class Varyasyonlar(models.Model):
+    urun = models.ForeignKey(Urunler, on_delete=models.CASCADE)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
+    fiyat = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    stok = models.IntegerField(blank=True, null=True)
+    aktifmi = models.BooleanField(default=True)
+    resim = models.ImageField(upload_to="varyasyonresimleri", blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = 'Varyasyonlar'
+        verbose_name = 'Varyasyon'
+
+    def __str__(self):
+        return self.isim

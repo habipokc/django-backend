@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Kategoriler, Markalar, Urunler, Etiketler
+from .models import Kategoriler, Markalar, Urunler, Etiketler, Varyasyonlar
+
 
 # Register your models here.
 
@@ -17,11 +18,18 @@ class MarkalarAdmin(admin.ModelAdmin):
 
 admin.site.register(Markalar, MarkalarAdmin)
 
+class InlineVaryasyon(admin.StackedInline):
+    model = Varyasyonlar
+    extra = 1
+
 class UrunlerAdmin(admin.ModelAdmin):
-    list_display = ['isim', 'seo_title', 'slug', 'aktifmi']
-    list_filter = ['aktifmi', 'isim']
+    list_display = ['isim', 'fiyat', 'marka', 'kategori', 'aktifmi']
+    list_filter = ['aktifmi', 'marka', 'kategori']
     search_fields = ['isim', 'seo_title', 'slug']
+    inlines = [InlineVaryasyon]
+
 
 admin.site.register(Urunler, UrunlerAdmin)
 
 admin.site.register(Etiketler)
+

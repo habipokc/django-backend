@@ -15,6 +15,7 @@ class Kategoriler(models.Model):
     seo_title = models.CharField(max_length=155, blank=True, null=True)
     seo_description = models.TextField(blank=True, null=True)
     slug = models.SlugField(max_length=155, unique=True, null=True, blank=True)
+    menuden_goster = models.BooleanField(default=True)
 
 
     class Meta:

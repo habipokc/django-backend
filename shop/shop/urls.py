@@ -18,12 +18,14 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import  settings
 from django.conf.urls.static import static
-from urunler.views import anasayfa, hakkinda, urundetay
+from urunler.views import anasayfa, hakkinda, urundetay, kategoridetay
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', anasayfa),
     path('hakkinda/', hakkinda),
+    path("kategori/<slug:slug>/", kategoridetay, name="kategoridetay"),
     path("<slug:slug>/", urundetay, name="urundetay"),
+
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

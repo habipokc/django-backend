@@ -14,3 +14,9 @@ def hakkinda(request):
 def urundetay(request, slug):
     urun = get_object_or_404(Urunler, slug=slug)
     return render(request, "urun.html", {"urun": urun})
+
+
+def kategoridetay(request, slug):
+    kategori = get_object_or_404(Kategoriler, slug=slug)
+    urunler = Urunler.objects.filter(kategori=kategori)
+    return render(request, "kategori.html", {"kategori": kategori, "urunler": urunler})

@@ -10,7 +10,7 @@ class Kategoriler(models.Model):
 
     ustkategori = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True,
                    help_text='Eğer bu kategori başka bir kategoriye bağlıysa burayı doldurunuz')
-
+    aciklama = models.TextField(blank=True, null=True)
     aktifmi = models.BooleanField(default=True)
     seo_title = models.CharField(max_length=155, blank=True, null=True)
     seo_description = models.TextField(blank=True, null=True)
@@ -75,8 +75,7 @@ class Urunler(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.isim)
-            super(Urunler, self).save(*args, **kwargs)
-        return self.slug
+        super().save(*args, **kwargs)
 
 class Varyasyonlar(models.Model):
     urun = models.ForeignKey(Urunler, on_delete=models.CASCADE)
